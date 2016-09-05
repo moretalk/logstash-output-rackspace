@@ -57,7 +57,7 @@ class LogStash::Outputs::Rackspace < LogStash::Outputs::Base
     
 
     begin
-      @rackspace_queue.messages.create :body => event, :ttl => @ttl
+      @rackspace_queue.messages.create :body => event.to_json, :ttl => @ttl
       #@rackspace_queue.messages.create :body => "some data here", :ttl => @ttl
     rescue => e
       @logger.warn("Failed to send event to rackspace cloud queues", :event => event, :exception => e,
